@@ -1,4 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
 #MenuTitle: Get metrics string
+#
+# Open a tab with the selected letter padded in some metrcis testing characters
 
 font = Glyphs.font
 layer = font.selectedLayers[0]
@@ -11,25 +15,24 @@ def wrap(letter, padding, occurances):
 
 	
 def metricsString(letter):
-	paddings = ["H", "O", "A", "n", "o", "v", "-", "."]
+	paddings = [u"H", u"O", u"A", u"n", u"o", u"v", u"-", u".", u"(", u")", u"“", u"„", u"»", u"«"]
 	text = ""
 	
 	# if the selection has components, print the first of in one row so it's easy 
 	# to manipulate them without messing up the metrics string we are printing below
 	components = iterateComponents(font.glyphs[letter].layers[font.masterIndex])
-	print "letter", letter, "components", components
 	if components:
 		text = "".join(["/" + x.parent.name for x in components]) + "\n"
 	
 	# for every tab print HOHO row first	
-	text = text + wrap("H", "O", 10) + "\n"
+	text = text + wrap(u"H", u"O", 10) + "\n"
 	
 	# print a row for each padding char defined
 	for pad in paddings:
 		text = text + wrap(letter, pad, 10) + "\n"
 		
 	# for every tab print nono row last
-	text = text + wrap("n", "o", 10)
+	text = text + wrap(u"n", u"o", 10)
 	return text
 
 

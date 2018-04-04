@@ -5,6 +5,8 @@ for all open fonts! I.e. this allows you to set vertical metrics
 for an entire family of fonts that should share vertical metrics,
 even though not in the same file.
 
+Inspired by Mark Foley's vertical metrics script: https://github.com/m4rc1e/mf-glyphs-scripts
+
 Logic:
 - First finds the highest and lowest extreme from all masters to
   base calculations on.
