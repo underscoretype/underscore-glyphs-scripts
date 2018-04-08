@@ -27,6 +27,10 @@ def metricsString(letter):
 	# for every tab print HOHO row first	
 	text = text + wrap(u"H", u"O", 10) + "\n"
 	
+	# escape a slash glyph
+	if letter == "/":
+		letter = "//"	
+
 	# print a row for each padding char defined
 	for pad in paddings:
 		text = text + wrap(letter, pad, 10) + "\n"
