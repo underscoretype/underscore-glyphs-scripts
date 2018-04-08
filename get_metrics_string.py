@@ -8,6 +8,9 @@ font = Glyphs.font
 layer = font.selectedLayers[0]
 
 def wrap(letter, padding, occurances):
+	if not font.glyphs[padding]:
+		return ""
+		
 	text = padding
 	for i in range(occurances):
 		text += letter + padding
@@ -29,11 +32,13 @@ def metricsString(letter):
 	
 	# escape a slash glyph
 	if letter == "/":
-		letter = "//"	
-
+		letter = "//"		
+		
 	# print a row for each padding char defined
 	for pad in paddings:
-		text = text + wrap(letter, pad, 10) + "\n"
+		row = wrap(letter, pad, 10)
+		if row:
+			text = text + row + "\n"
 		
 	# for every tab print nono row last
 	text = text + wrap(u"n", u"o", 10)
@@ -68,3 +73,5 @@ def getSelected():
 
 for glyph in getSelected():
 	Glyphs.font.newTab(metricsString(glyph))
+	print glyph
+	print metricsString(glyph)
