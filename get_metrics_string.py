@@ -17,23 +17,27 @@ def wrap(letter, padding, occurances):
 	return text
 
 	
-def metricsString(letter):
+def metricsString(glyph):
 	paddings = [u"H", u"O", u"A", u"n", u"o", u"v", u"-", u".", u"(", u")", u"“", u"„", u"»", u"«"]
 	text = ""
 	
+	if not glyph.name:
+		print "Can't create metrics string for unnamed glyph"
+		return
+	
+	# save way of getting any name glyph
+	letter = "/" + glyph.name + " "
+	
 	# if the selection has components, print the first of in one row so it's easy 
 	# to manipulate them without messing up the metrics string we are printing below
-	components = iterateComponents(font.glyphs[letter].layers[font.masterIndex])
+
+	components = iterateComponents(font.glyphs[glyph.name].layers[font.masterIndex])
 	if components:
 		text = "".join(["/" + x.parent.name for x in components]) + "\n"
 	
 	# for every tab print HOHO row first	
 	text = text + wrap(u"H", u"O", 10) + "\n"
 	
-	# escape a slash glyph
-	if letter == "/":
-		letter = "//"		
-		
 	# print a row for each padding char defined
 	for pad in paddings:
 		row = wrap(letter, pad, 10)
@@ -67,11 +71,8 @@ def getSelected():
 	if selection:
 		for layer in selection:
 			glyph = layer.parent
-    			if glyph.unicode:
-        			selected.append( unichr(int(glyph.unicode, 16) ) )
+        	selected.append( glyph )
 	return selected
 
 for glyph in getSelected():
 	Glyphs.font.newTab(metricsString(glyph))
-	print glyph
-	print metricsString(glyph)
