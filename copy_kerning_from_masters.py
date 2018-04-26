@@ -50,7 +50,6 @@ def copyKerningFromMasterToMaster(source, target):
 def copyKerningFrom(source, target, left, right):
 	if not left or not right:
 		print "invalid kern pair", left, right
-		print right == "\n"
 		return
 		
 	try:
@@ -59,18 +58,14 @@ def copyKerningFrom(source, target, left, right):
 			rightKern = right.leftKerningKey
 			kern = font.kerningForPair(source.id, leftKern, rightKern)
 			
-			# -1 because casting to int will round up
-			# for some reason setting the existing "max int" in e notation will
-			# break things
-			print kern
-			print sys.maxint
-			print kern == sys.maxint
-			if int(kern) - 1 == sys.maxint:
-				# todo: how to set to "unset"?
-				# kern = sys.maxint
+			# just an arbitrary kern value that is beyond reasonable to be real
+			# i.e. will catch Glyph's maxint for "unset"
+			if kern > 10000:
+				font.removeKerningForPair(target.id, leftKern, rightKern)
 				return
 								
 			font.setKerningForPair(target.id, leftKern, rightKern, kern)
+			return
 			
 		else:
 			print "kern groups not found"
