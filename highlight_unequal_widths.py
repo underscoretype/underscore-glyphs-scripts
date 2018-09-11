@@ -11,5 +11,5 @@ for glyph in font.glyphs:
 		glyph.color = 9
 		print glyph
 	else:
-		if glyph.color < 100:
+		if glyph.color == 9:
 			glyph.color = 9223372036854775807
