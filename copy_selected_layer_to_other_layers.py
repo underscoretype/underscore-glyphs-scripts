@@ -33,7 +33,7 @@ def kerningOccurances(glyph, master):
 		for value in masterKerning[key]:			
 			if value == glyph.id or value == glyph.leftKerningKey or value == glyph.rightKerningKey:
 				print "glyph %s appears as second in kern pair" % glyph.name
-				
+
 				if key not in syncKernings:
 					syncKernings[key] = {}
 				syncKernings[key][value] = masterKerning[key][value]
@@ -83,7 +83,7 @@ if selection:
 			print kerningOccurances(glyph, masterId)
 			kerns = kerningOccurances(glyph, masterId)
 			if kerns:
-				for left in kerns:
+				for left in kerns:t
 					for right in kerns[left]:					
 						if isGlyphKernGroup(glyph, left) or isGlyphKernGroup(glyph, right):
 							print "remove kerning pair %s : %s" % (left, right)

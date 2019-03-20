@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-#MenuTitle: Sync masters from first to second font
+#MenuTitle: Sync master meta from first to second font
 #
 # Adds (full copy) or updates (omits italicAngle, stems, guides) the font masters of the current active font to the second font 
 source = Glyphs.fonts[0]
